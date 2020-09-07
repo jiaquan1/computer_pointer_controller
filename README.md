@@ -40,15 +40,20 @@ Above command should give output like this image optimizer_output:
 
 ## Demo
 Step1. Clone the Repository using git clone https://github.com/jiaquan1/computer_pointer_controller.git
-Step2. Instantiate OpenVino Environment. For windows use below command
+Step2. Create Virtual Environment using command python -m venv base in the command prompt, then activate environment using below command,
+
+cd base/Scripts/
+activate
+Step3. install all the dependency using pip install -r requirements.txt.
+Step4. Instantiate OpenVino Environment. For windows use below command
 
 cd C:\Program Files (x86)\IntelSWTools\openvino\bin\
 setupvars.bat
 
-Step3. Go back to the project directory folder
+Step5. Go back to the project directory folder
 cd path_of_project_directory
 
-Step4. Run below commands to execute the project
+Step6. Run below commands to execute the project
 
 python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-adas-binary-0001.xml \ 
 -lr /landmarks-regression-retail-0009/FP32-INT8/landmarks-regression-retail-0009.xml \ 
@@ -56,7 +61,7 @@ python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-ada
 -ge /gaze-estimation-adas-0002/FP32-INT8/gaze-estimation-adas-0002.xml \ 
 -i /bin/demo.mp4 -flags ff fl fh fg
 
-Step5. To run it on GPU, run below commands to execute:
+Step7. To run it on GPU, run below commands to execute:
 python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-adas-binary-0001.xml \ 
 -lr /landmarks-regression-retail-0009/FP32/landmarks-regression-retail-0009.xml \ 
 -hp /head-pose-estimation-adas-0001/FP32/head-pose-estimation-adas-0001.xml \ 
@@ -94,25 +99,25 @@ python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-ada
 
 ![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/Workspace.png)
 
-face_detection.py
+### face_detection.py
 
 Contains preprocession of video frame, perform infernce on it and detect the face, postprocess the outputs.
-facial_landmarks_detection.py
+### facial_landmarks_detection.py
 
 Take the deteted face as input, preprocessed it, perform inference on it and detect the eye landmarks, postprocess the outputs.
-head_pose_estimation.py
+### head_pose_estimation.py
 
 Take the detected face as input, preprocessed it, perform inference on it and detect the head postion by predicting yaw - roll - pitch angles, postprocess the outputs.
-gaze_estimation.py
+### gaze_estimation.py
 
 Take the left eye, rigt eye, head pose angles as inputs, preprocessed it, perform inference and predict the gaze vector, postprocess the outputs.
-input_feeder.py
+### input_feeder.py
 
 Contains InputFeeder class which initialize VideoCapture as per the user argument and return the frames one by one.
-mouse_controller.py
+### mouse_controller.py
 
 Contains MouseController class which take x, y coordinates value, speed, precisions and according these values it moves the mouse pointer by using pyautogui library.
-main.py
+### main.py
 
 Users need to run main.py file for running the app.
 bin folder contains the demo.mp4 files
