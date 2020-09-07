@@ -22,16 +22,19 @@ Step1: Download below three softwares:
 Microsoft Visual Studio* with C++ 2019, 2017, or 2015 with MSBuild
 CMake 3.4 or higher 64-bit NOTE: If you want to use Microsoft Visual Studio 2019, you are required to install CMake 3.14.
 Python 3.6.5 64-bit
+
 Step2. Download OpenVino Toolkit 2020.1 with all the prerequisites by following this installation guide
 
 Step3: Setup OpenVino Toolkit using below command in command prompt
 
 cd C:\Program Files (x86)\IntelSWTools\openvino\bin\
 setupvars.bat
+
 Step4: Configure Model Optimizer using below commnads in command prompt
 
 cd C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\model_optimizer\install_prerequisites
 install_prerequisites.bat
+
 Step5: Varify installation
 
 cd C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\demo\
@@ -40,6 +43,7 @@ Above command should give output like this image optimizer_output:
 
 ## Demo
 Step1. Clone the Repository using git clone https://github.com/jiaquan1/computer_pointer_controller.git
+
 Step2. Create Virtual Environment using command python -m venv base in the command prompt, then activate environment using below command,
 
 cd base/Scripts/
@@ -72,13 +76,21 @@ python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-ada
 Command Line Argument Information:
 
 fd : Specify path of xml file of face detection model
+
 lr : Specify path of xml file of landmark regression model
+
 hp : Specify path of xml file of Head Pose Estimation model
+
 ge : Specify path of xml file of Gaze Estimation model
+
 i : Specify path of input Video file or cam for Webcam
+
 flags (Optional): if you want to see preview video in separate window you need to Specify flag from ff, fl, fh, fg like -flags ff fl...(Space seperated if multiple values) ff for faceDetectionModel, fl for landmarkRegressionModel, fh for headPoseEstimationModel, fg for gazeEstimationModel
+
 probs (Optional): if you want to specify confidence threshold for face detection, you can specify the value here in range(0, 1), default=0.6
+
 d (Optional): Specify Device for inference, the device can be CPU, GPU, FPGU, MYRID
+
 o : Specify path of output folder where we will store results
 ## Benchmarks
 I tested on my local computer on CPU (Intel(R) Core(TM) i7-8665U CPU @1.90GHz 2.11GHz) and GPU (Intel® UHD Graphics 620). I have checked Inference Time, Model Loading Time, and Frames Per Second model for FP16, FP32, and FP16-INT8 of all the models except Face Detection Model. Face Detection Model was only available on FP32-INT1 precision. You can use below commands to get results for respective precisions:
