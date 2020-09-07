@@ -13,7 +13,7 @@ Four models used in this project:
 The Pipeline:
 In this project I coordinated the flow of data from the input, and then amongst the different models and finally to the mouse controller. The flow of data look like this:
 
-pipeline
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/pipeline.png)
 
 Project Set Up and Installation
 
@@ -76,7 +76,7 @@ probs (Optional): if you want to specify confidence threshold for face detection
 d (Optional): Specify Device for inference, the device can be CPU, GPU, FPGU, MYRID
 o : Specify path of output folder where we will store results
 ## Benchmarks
-I tested on my local computer on CPU (Intel(R) Core(TM) i7-8665U CPU @1.90GHz 2.11GHz) and GPU (Intel® UHD Graphics 620). I have checked Inference Time, Model Loading Time, and Frames Per Second model for FP16, FP32, and FP16-INT8 of all the models except Face Detection Model. Face Detection Model was only available on FP32-INT1 precision. You can use below commands to get results for respective precisions:
+I tested on my local computer on CPU (Intel(R) Core(TM) i7-8665U CPU @1.90GHz 2.11GHz) and GPU (IntelÂ® UHD Graphics 620). I have checked Inference Time, Model Loading Time, and Frames Per Second model for FP16, FP32, and FP16-INT8 of all the models except Face Detection Model. Face Detection Model was only available on FP32-INT1 precision. You can use below commands to get results for respective precisions:
 FP16:
 python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-adas-binary-0001.xml \ 
 -lr /landmarks-regression-retail-0009/FP16/landmarks-regression-retail-0009.xml \ 
