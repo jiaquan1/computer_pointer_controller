@@ -1,6 +1,6 @@
 # Computer Pointer Controller
 
-Introduction
+## Introduction
 In this project, I used face detection model, head pose estimation model, face landmark detection model and gaze detection model to control the mouse pointer on my computer.  I used the Gaze Estimation model to estimate the gaze of the user's eyes and change the mouse pointer position accordingly. This project demonstrated my ability to run multiple models in the same machine and coordinate the flow of data between those models.
 
 I used the InferenceEngine API from Intel's OpenVino ToolKit to build the project. This project is for the Intel@ Edge AI FOR IoT Developers Nanodegree Program.
@@ -13,9 +13,9 @@ Four models used in this project:
 The Pipeline:
 In this project I coordinated the flow of data from the input, and then amongst the different models and finally to the mouse controller. The flow of data look like this:
 
-pipeline
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/pipeline.png)
 
-Project Set Up and Installation
+## Project Set Up and Installation
 
 Step1: Download below three softwares:
 
@@ -38,7 +38,7 @@ cd C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\demo\
 demo_squeezenet_download_convert_run.bat
 Above command should give output like this image optimizer_output:
 
-Demo
+## Demo
 Step1. Clone the Repository using git clone https://github.com/jiaquan1/computer_pointer_controller.git
 Step2. Instantiate OpenVino Environment. For windows use below command
 
@@ -63,7 +63,7 @@ python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-ada
 -ge /gaze-estimation-adas-0002/FP32/gaze-estimation-adas-0002.xml \ 
 -i /bin/demo.mp4 -flags ff fl fh fg -d GPU
 
-Documentation
+## Documentation
 Command Line Argument Information:
 
 fd : Specify path of xml file of face detection model
@@ -76,7 +76,7 @@ probs (Optional): if you want to specify confidence threshold for face detection
 d (Optional): Specify Device for inference, the device can be CPU, GPU, FPGU, MYRID
 o : Specify path of output folder where we will store results
 ## Benchmarks
-I tested on my local computer on CPU (Intel(R) Core(TM) i7-8665U CPU @1.90GHz 2.11GHz) and GPU (Intel® UHD Graphics 620). I have checked Inference Time, Model Loading Time, and Frames Per Second model for FP16, FP32, and FP16-INT8 of all the models except Face Detection Model. Face Detection Model was only available on FP32-INT1 precision. You can use below commands to get results for respective precisions:
+I tested on my local computer on CPU (Intel(R) Core(TM) i7-8665U CPU @1.90GHz 2.11GHz) and GPU (IntelÂ® UHD Graphics 620). I have checked Inference Time, Model Loading Time, and Frames Per Second model for FP16, FP32, and FP16-INT8 of all the models except Face Detection Model. Face Detection Model was only available on FP32-INT1 precision. You can use below commands to get results for respective precisions:
 FP16:
 python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-adas-binary-0001.xml \ 
 -lr /landmarks-regression-retail-0009/FP16/landmarks-regression-retail-0009.xml \ 
@@ -90,7 +90,9 @@ python main.py -fd /face-detection-adas-binary-0001/FP32-INT1/face-detection-ada
 -ge /gaze-estimation-adas-0002/FP16-INT8/gaze-estimation-adas-0002.xml \ 
 -i /bin/demo.mp4 -flags ff fl fh fg
 
-Project folder contains all the executable files:
+## Project folder contains all the executable files:
+
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/Workspace.png)
 
 face_detection.py
 
@@ -117,24 +119,27 @@ bin folder contains the demo.mp4 files
 results folder is to save the statistical result from the running.
 Other 4 folders are the model files downed from open zoo. 
 
-
 Benchmark results of running my model on multiple hardwares and multiple model precisions. My benchmarks can include: model loading time, input/output processing time, model inference time.
 
-Device	Precision model_time(s)	Inference_Time(s) FPS
-CPU	FP32	1.013162851	24.6	2.398373984
-CPU	FP16	1.034621477	24.4	2.418032787
-CPU	INT8	1.17280674	25.7	2.295719844
-GPU	FP32	57.16926455	26.6	2.218045113
-GPU	FP16	58.18735433	26.4	2.234848485
-GPU	INT8	67.42535996	31.2	1.891025641
+Model loading time:
 
-Results
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/Model_time.png)
+
+Inference time:
+
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/Inference_time.png)
+
+FPS:
+
+![image](https://github.com/jiaquan1/computer_pointer_controller/blob/master/bin/FPS.png)
+
+## Results
 For both CPU and GPU, FP32 has smallest model time.
 For both CPU and GPU, FP16 has smallest inference time, this can be said as combination of precisions lead to higher weight of the model.
 For both CPU and GPU, FP16 has slightly better performance regarding FPS, this is coincidence with the inference time result. 
 CPU has much smaller model time, and less interence time than GPU at all precision level, this might because the GPU on this device is not optimized to to run these models. Many layers are not supported on GPU, there is much data traffic between GPU and CPU when running on GPU, which slowed down the process. 
 
-Stand Out Suggestions
+## Stand Out Suggestions
 Edge Cases
 Multiple People Scenario: If we encounter multiple people in the video frame, it will always use and give results one face even though multiple people detected,
 No Head Detection: it will skip the frame and inform the user
